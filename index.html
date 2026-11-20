@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Master prompt builder for Indian Bhakti Dhara devotional posters and videos, with a devotee aarti and prayer mode."><title>IBD L1–L30 Master Prompt Tool</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Yatra+One&family=Tiro+Devanagari+Hindi&family=Marcellus&family=Manrope:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#06090b;--s1:#0c1214;--s2:#111a1d;--line:rgba(212,175,55,.25);--text:#f5efe0;--mut:#a9b8b3;--gold:#d4af37;--teal:#14b8a6;--ink:#111;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4efe2;--s1:#fffdf6;--s2:#f1ead6;--line:rgba(154,122,30,.4);--text:#17201e;--mut:#55645f;--gold:#8a6d14;--teal:#0a7a6e}}
+:root[data-theme="light"]{--bg:#f4efe2;--s1:#fffdf6;--s2:#f1ead6;--line:rgba(154,122,30,.4);--text:#17201e;--mut:#55645f;--gold:#8a6d14;--teal:#0a7a6e}
+:root[data-theme="dark"]{--bg:#06090b;--s1:#0c1214;--s2:#111a1d;--line:rgba(212,175,55,.25);--text:#f5efe0;--mut:#a9b8b3;--gold:#d4af37;--teal:#14b8a6}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:16px}
+h1,h2{font-family:"Cinzel Decorative",Marcellus,"Yatra One",serif;font-weight:700;margin:0}
+.hi{font-family:"Yatra One","Tiro Devanagari Hindi",serif;font-weight:400}
+h1{font-size:clamp(1.8rem,6vw,3rem);color:var(--gold);line-height:1}
+.sub{color:var(--mut);font-size:14px;margin:6px 0 0}
+.card{background:var(--s1);border:1px solid var(--line);border-radius:18px;padding:14px;margin-top:14px}
+.lbl{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--teal);margin:0 0 8px}
+.grid{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+button,select{font:inherit;color:inherit}
+.opt{background:var(--s2);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:left;cursor:pointer}
+.opt b{display:block;font-size:13px}.opt span{font-size:11px;color:var(--mut)}
+.opt.on{background:var(--gold);border-color:var(--gold)}.opt.on *{color:var(--ink)!important}
+.lv{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px}
+.lv button{flex:0 0 auto;min-width:48px;padding:8px;border-radius:10px;border:1px solid var(--line);background:var(--s2);font-weight:800;cursor:pointer}
+.lv button.on{background:var(--gold);color:var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:var(--s2);cursor:pointer;font-weight:600;font-size:13px}
+.pill.on{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.btn{padding:10px 18px;border-radius:99px;border:0;background:var(--gold);color:var(--ink);font-weight:800;cursor:pointer}
+.btn.alt{background:var(--s2);color:var(--text);border:1px solid var(--line)}
+textarea{width:100%;min-height:420px;background:#071011;color:#f5efe0;border:1px solid var(--line);border-radius:14px;padding:14px;font:13px/1.65 Manrope,"Tiro Devanagari Hindi",sans-serif;resize:vertical}
+.note{font-size:13px;color:var(--mut)}
+.sel{background:var(--s2);border:1px solid var(--line);border-radius:12px;padding:10px;font-size:13px;line-height:1.5;margin-top:10px}
+ul{padding:0;list-style:none;margin:8px 0 0}li.pk{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;font-size:13px}
+li.pk button{border:1px solid var(--line);background:var(--s2);border-radius:99px;padding:4px 10px;cursor:pointer;font-size:12px}
+</style></head>
+<body><div class="wrap">
+<div class="row" style="justify-content:space-between"><div><p class="lbl" style="margin:0">INDIAN BHAKTI DHARA</p><h1>L1–L30 Master Prompt Tool</h1><p class="hi" style="margin:8px 0 0;font-size:1.2rem;color:var(--teal)">भक्ति • सिनेमा • दिव्यता</p></div><button class="pill" id="theme">Theme</button></div>
+<p class="sub">Pick platform, deity and level. The master prompt builds live. Copy it or save it in this browser.</p>
+
+<div class="card"><p class="lbl">1 · PLATFORM</p><div class="grid" id="plat"></div><div class="sel" id="platInfo"></div></div>
+<div class="card"><p class="lbl">2 · DEITY / COUPLE — NATURE CONTROL</p><div class="grid" id="deity"></div><div class="sel" id="deityInfo"></div></div>
+<div class="card"><p class="lbl">3 · LEVEL</p><div class="row" style="margin-bottom:8px"><button class="pill" id="prev">Prev</button><b id="lvName"></b><button class="pill" id="next">Next</button></div><div class="lv" id="lv"></div><p class="note" id="lvNote"></p></div>
+<div class="card"><p class="lbl">4 · VOICEOVER, LENGTH, LUT</p>
+<div class="row" id="langs"></div><div class="row" id="lens" style="margin-top:8px"></div><div class="row" id="luts" style="margin-top:8px"></div></div>
+
+<div class="card"><p class="lbl">5 · DEVOTEE MODE: YOU IN AARTI / PRAYER</p>
+<p class="note" style="margin:0 0 10px">Add your photo. The tool builds a prompt that keeps your face and identity unchanged and places you in the aarti or prayer scene, using the platform, deity, level and LUT chosen above. Add up to 5 photos, label each one (Me, Father, Mother and so on), then choose below who appears in the picture. They are resized and saved in this browser only, never uploaded, and you can remove or download them any time. This tool writes the prompt only: attach the same photo in an image tool that accepts a reference photo.</p>
+<div class="row"><input type="file" id="ph" accept="image/*" multiple><span class="note" id="phcount"></span><button class="pill" id="phclear">Remove all</button><button class="pill" id="phall">Use all</button></div>
+<p class="lbl" style="margin-top:12px">WHO IS IN THE PICTURE</p><div class="row" id="dvmode"></div><p class="note" id="modenote" style="margin-top:6px"></p>
+<div class="row" id="phs" style="margin-top:10px"></div>
+<p class="lbl" style="margin-top:12px">SCENE</p><div class="row" id="dvsc"></div>
+<p class="lbl" style="margin-top:12px">ATTIRE</p><div class="row" id="dvat"></div>
+<p class="lbl" style="margin-top:12px">EXPRESSION</p><div class="row" id="dvex"></div>
+<div class="row" style="margin:12px 0"><button class="btn" id="dvcopy">Copy devotee prompt</button><span class="note" id="dvmsg"></span></div>
+<textarea id="dvout" readonly style="min-height:300px"></textarea></div>
+
+<div class="card"><p class="lbl">MASTER PROMPT</p>
+<div class="row" style="margin-bottom:10px"><button class="btn" id="copy">Copy prompt</button><button class="btn alt" id="save">Save pack</button><button class="btn alt" id="dl">Download .txt</button><span class="note" id="msg"></span></div>
+<textarea id="out" readonly></textarea></div>
+<div class="card"><p class="lbl">SAVED PACKS (THIS BROWSER)</p><ul id="packs"></ul></div>
+<p class="note" style="text-align:center;margin:18px 0">Indian Bhakti Dhara · OTT Premium Ultra · <span class="hi" style="font-size:15px">जय भक्ति धारा</span></p>
+</div>
+<script>
+var PL=[["yt-video","YouTube Video","16:9","1920x1080","Title TOP Centre, face centre, no bottom title. YT lower-third, progress bar and controls hide bottom text, so keep the bottom clean.","1920x1080 · 24fps"],
+["yt-shorts","YouTube Shorts","9:16","1080x1920","Title TOP Centre below IBD, face centre-middle, bottom clean, right side clear for Shorts UI buttons.","1080x1920 · 30fps"],
+["ig-reels","Instagram Reels","9:16","1080x1920","Title TOP Centre below IBD, face centre-middle, bottom and right side clean for Reels UI.","1080x1920 · 30fps"],
+["ig-post","IG / Threads Post","1:1","1080x1080","Title TOP Centre, face centre, bottom only small branding, composition centred.","1080x1080 · 30fps"],
+["ig-portrait","IG / Threads Portrait","4:5","1080x1350","Title TOP Centre, face centre-middle, bottom clean with small branding only.","1080x1350 · 30fps"],
+["ig-story","Story / WhatsApp Status","9:16","1080x1920","Title TOP Centre below IBD, face centre-middle, bottom clean, edges clear for UI.","1080x1920 · 30fps"]];
+// id, group, name, hindi, nature, pose, mood, colour, light, placement, never
+var DE=[
+["shiv-parvati","Couples","Shiv + Parvati","शिव + पार्वती","Calm, Tapasya, Family, Protection","Together on Kailash, Parvati seated beside Shiv, calm and close","Shant + Prem","White + Teal + Gold","Moon + cool + one warm diya glow","Parvati beside Shiv, never behind or apart","fierce, distant, separated"],
+["ram-sita","Couples","Ram + Sita","राम + सीता","Maryada, Dharma, Loyalty, Grace","Ram and Sita STAND TOGETHER holding hands, Ram in blessing mudra, Hanuman KNEELS IN FRONT with folded hands","Maryada + Prem","Saffron + Gold + Teal","Warm temple gold + soft daylight","Ram–Sita standing together, Hanuman kneeling in front","playful leela, casual, apart, sitting behind"],
+["krishna-radha","Couples","Krishna + Radha","कृष्ण + राधा","Prem, Leela, Bansuri, Vrindavan","Krishna centre with flute, Radha beside him or peeking from a tree, loving gaze","Prem + Leela","Peacock Blue + Gold + Green","Golden-hour Vrindavan glow + diya warmth","Krishna centre with flute, Radha close beside","angry, harsh, distant"],
+["vishnu-lakshmi","Couples","Vishnu + Lakshmi","विष्णु + लक्ष्मी","Palan, Shanti, Aishwarya, Seva","Vishnu reclining on Sheshnaag, Lakshmi at His feet in seva","Shant + Seva","Deep Teal + Gold + Pink Lotus","Cosmic teal + warm gold lotus glow","Vishnu on Sheshnaag, Lakshmi at His feet","restless, showy, apart"],
+["shiv-shakti","Couples","Shiv + Shakti","शिव + शक्ति","Power + Calm balance","Together in balanced stillness, power held in quiet control","Shant + Shakti","White + Deep Teal + Gold, restrained red accent","Cool moonlight + warm gold rim","Shakti beside Mahadev, equal and balanced","uncontrolled fury, imbalance"],
+["ganesha-riddhi","Couples","Ganesha + Riddhi–Siddhi","गणेश + ऋद्धि–सिद्धि","Vighnaharta, Shubh, Buddhi","Ganesha seated in blessing at centre, Riddhi–Siddhi small on either side","Shubh + Prem","Saffron + Gold + Green","Warm festive gold + diya glow","Ganesha centre, Riddhi–Siddhi small beside","stern, crowded"],
+["hanuman","Single Deities","Hanuman","हनुमान","Bhakti, Seva, Shakti, Vinamrata","Kneeling with folded hands, or flying with Gada, humble and devoted","Bhakti + Seva","Saffron + Gold","Warm saffron-gold + temple glow","Kneeling, folded hands, head bowed","arrogant, proud, threatening"],
+["krishna","Single Deities","Krishna","कृष्ण","Leela, Bansuri, Makhan, Gopal","Flute at the lips, or Makhan moment, or Govardhan lifted calmly","Prem + Anand","Peacock Blue + Gold + Green","Vrindavan golden hour + diya glow","Krishna centre, one clear subject","angry, harsh, stern"],
+["ram","Single Deities","Ram","राम","Maryada Purushottam, Dhanush, Blessing","Standing with Dhanush held with grace, one hand in blessing mudra","Maryada + Dharma","Saffron + Gold + Teal","Warm gold + clear daylight","Ram centre, standing, blessing hand raised","playful leela, casual, angry"],
+["shiv","Single Deities","Shiv","शिव","Mahadev, Dhyan, Trishul, Damru","Seated in Dhyan or calm, controlled Tandav, Trishul and Damru with calm authority","Shant + Dhyan","White + Teal + Gold","Moon + cool + warm diya","Shiv centre, Dhyan seated","rage, gore, chaos"],
+["durga","Single Deities","Durga / Maa","दुर्गा / माँ","Shakti, Protection, Mamta","On the lion, 8 arms in blessing and protection, maternal","Shakti + Mamta","Red + Gold + Teal","Warm gold protective glow + diya","Maa centre on the lion, 8 arms in blessing","violent gore, blood, fear"],
+["saraswati","Single Deities","Saraswati","सरस्वती","Gyaan, Shanti, Veena","Seated gracefully with Veena, one hand in blessing","Shant + Gyaan","White + Gold + Soft Teal","Soft white-gold light","Saraswati centre, seated, Veena held with grace","loud, harsh, showy"],
+["lakshmi","Single Deities","Lakshmi","लक्ष्मी","Dhan, Aishwarya, Kamal","Seated on a lotus, hands in blessing, gentle symbolic abundance","Shant + Aishwarya","Pink + Gold + Deep Teal","Warm gold lotus glow + soft teal","Lakshmi centre on lotus","showy, restless"],
+["ganesha","Single Deities","Ganesha","गणेश","Vighnaharta, Modak, Shubh Aarambh","Seated in blessing, Modak in hand, joyful and welcoming","Shubh + Anand","Saffron + Gold + Green","Warm festive gold + diya glow","Ganesha centre, blessing hand raised","stern, crowded"],
+["narasimha","Single Deities","Narasimha","नरसिंह","Protection, Ugra but divine, NOT violent","Calm blessing of Prahlad, emerging from the pillar, no blood or violence","Shant + Protection","Gold + Deep Teal + Warm Saffron","Warm gold pillar light + teal calm","Emerging from pillar, Prahlad in devoted prayer","blood, violence, gore, fear"],
+["dashavatar","All Avatars","Dashavatar","दशावतार","All 10 avatars, calm divine nature","All 10 avatars in one calm ordered composition, none violent, Narasimha in calm version","Shant + Divya","Deep Teal + Gold + Saffron","Golden god-ray + calm teal","All 10 ordered, none crowding another","violent, gore, blood"],
+["shiv-parivar","Family & Darbar","Shiv Parivar","शिव परिवार - कैलाश","Calm family, Tapasya, Prem","Shiv centre in blessing, Parvati on His right with gentle smile, Ganesha front-left with Modak, Kartikeya front-right with Vel, Nandi behind","Shant + Prem + Family","White + Deep Teal + Rich Gold","Moon + cool + warm diya, layered nebula","FIXED: Shiv centre, Parvati right, Ganesha front-left, Kartikeya front-right, Nandi behind","angry, violent, separated"],
+["ram-darbar","Family & Darbar","Ram Darbar","राम दरबार - अयोध्या","Maryada, Bhakti, Prem","Ram + Sita STAND TOGETHER centre holding hands, Lakshman behind at side with Dhanush, Hanuman KNEELS IN FRONT with folded hands and Gada beside","Maryada + Bhakti","Saffron + Deep Teal + Rich Gold","Warm temple gold + diya glow, layered nebula","FIXED: Ram–Sita centre holding hands, Lakshman side, Hanuman kneeling in front","sitting behind, separate prayer, casual"]];
+var LN=["Basic Draft","Soft Draft","Clean Draft","Stable Draft","Refined Draft","Cinematic Draft","Premium Draft","Ultra Draft","Pro Draft","Signature Draft","OTT Ready","OTT Premium","OTT Ultra","Cinematic Premium","Festival Ready","Theatrical Draft","Final Draft","Minimum for Posting","Old Top","New Top","Beyond Top","Master Tier","Grand Master","Divine Tier","Celestial Tier","Eternal Tier","Supreme Tier","Ultimate Tier","Near Infinity","Infinity Final Top"];
+var RES=["720p","720p","720p","1080p","1080p","1080p","1080p","2K","2K","2K","2K","4K","4K","4K","4K","4K","4K","6K","6K","8K","8K","8K","8K","10K","10K","12K","12K","12K","12K","12K+"];
+var STEPS=[20,22,24,26,28,30,32,35,38,40,45,50,55,60,65,70,75,80,85,90,95,100,102,105,108,110,112,115,118,120];
+function tier(n){
+ if(n<=5)return {t:"Basic",sh:"1/125",an:"90°",ap:"f/8",iso:"400",moog:"OFF",neb:"OFF",vfx:"OFF",face:"OFF",god:"Soft minimal"};
+ if(n<=10)return {t:"Low",sh:"1/100",an:"120°",ap:"f/5.6",iso:"250",moog:"Low",neb:"OFF",vfx:"Low",face:"Basic",god:"Soft"};
+ if(n<=17)return {t:"Mid",sh:"1/80",an:"150°",ap:"f/2.8–4",iso:"100–160",moog:"Mid",neb:"Low soft glow",vfx:"Mid",face:"Medium",god:"Medium"};
+ if(n<=20)return {t:"High",sh:"1/60",an:"180°",ap:"f/1.8–2.8",iso:"64–80",moog:"High",neb:"Mid divine glow",vfx:"High",face:"High",god:"Strong"};
+ if(n<30)return {t:"Ultra",sh:"1/50",an:"180°",ap:"f/1.4–2.8",iso:"25–50",moog:"Max",neb:"High cosmic",vfx:"Ultra",face:"Ultra",god:"Max"};
+ return {t:"IMAX Max",sh:"1/50",an:"180°",ap:"f/1.4–2.8",iso:"25",moog:"Max",neb:"Max cosmic gold",vfx:"Full",face:"Max",god:"Max"};}
+var ANG=["Low angle, temple rises behind","High crane angle over diyas and courtyard","Three-quarter angle, face turned to the light","Eye-level close angle, direct eye contact","Side profile against god-ray and pillars","Over-the-shoulder diya angle, flame in foreground"];
+var POSE=["Standing Aarti, both hands on the diya plate","Seated prayer, folded hands, marigold in lap","Walking Pradakshina, one hand raised in blessing","Eyes half-closed, head tilted in devotion","Calm steady stance, gaze fixed ahead","One hand in blessing mudra, other holding lotus"];
+var LIG=["Yamuna sunrise, pink-gold light from the left","Vrindavan evening, deep amber diya glow","Moonlight + diya glow, dark teal sky","Golden-hour temple doorway, warm beam","Monsoon-cloud light, silver-gold, wet stone shine","Pre-dawn deep blue-teal, one warm god-ray"];
+var BG=["Ghat at sunrise, water reflection and mist","Evening street, temple towers, hanging lamps","Night grove, fireflies, moon and dark water","Grand mandapa, carved pillars, incense mist","Forest grove, dappled light, peacock feather","Temple steps in rain, reflections, petals"];
+var TT=["Title TOP Centre large, face centre-middle","Title TOP Centre small below IBD, face large","Title TOP Centre with gold divider","Title TOP Right small gold, face left of centre","Title TOP Left below IBD, face right of centre","Title TOP Centre, two lines English + Devanagari"];
+var LANGS=["Hindi","English","Hinglish"],LENS=[["30s","Shorts · 30 sec","70–80 words",[5,10,10,5]],["1min","Reels · 1 min","140–150 words",[10,20,20,10]],["5min","Long · 5 min","700 words",[60,90,90,60]]];
+var LUTS=[["auto","Auto"],["Teal+Gold","Teal+Gold"],["Saffron+Gold","Warm Ayodhya"],["White+Teal","Cool Kailash"],["Peacock Blue+Gold","Vrindavan"],["Deep Teal+Pink","Ksheer Sagar"]];
+var S={p:0,d:1,l:30,lang:0,len:0,lut:"auto"},$=function(i){return document.getElementById(i)};
+function chips(el,arr,get,cur,fn){el.innerHTML="";arr.forEach(function(x,i){var b=document.createElement("button");b.className="pill"+(cur===get(x,i)?" on":"");b.textContent=x._t;b.onclick=function(){fn(get(x,i))};el.appendChild(b)})}
+function autoLut(d){var i=d[0];return i.indexOf("ram")==0?"Saffron+Gold":i.indexOf("shiv")==0?"White+Teal":i.indexOf("krishna")==0?"Peacock Blue+Gold":i.indexOf("vishnu")==0?"Deep Teal+Pink":"Teal+Gold"}
+function music(d){var i=d[0];return i.indexOf("shiv")==0?"Damru + soft Om chant + Tanpura":i.indexOf("ram")==0?"Sitar + soft Dholak + Tanpura":i.indexOf("krishna")==0?"Bansuri + Tabla + Tanpura":i.indexOf("vishnu")==0?"Shankh + soft Harmonium + Tanpura":"Flute + Tabla + Tanpura soft"}
+function build(){
+ var P=PL[S.p],d=DE[S.d],n=S.l,t=tier(n),v=(n-1)%6,lg=LANGS[S.lang],ln=LENS[S.len],lut=S.lut==="auto"?autoLut(d):S.lut,m=music(d),dop=n>=18;
+ var hook=lg=="Hindi"?"इस कथा में एक पल रुकिए, यही पल आपका दिन बदल सकता है।":lg=="Hinglish"?"Is katha me ek pal rukiye, this one moment can change your day.":"Pause for one moment with "+d[2]+". This one moment can change your day.";
+ var cta=lg=="English"?"Comment your mantra below and share this devotion ahead.":lg=="Hindi"?"कमेंट में अपना मंत्र लिखिए और इस भक्ति को आगे बढ़ाइए।":"Comment me apna mantra likhiye and share this bhakti ahead.";
+ var sc=["Establishing: "+BG[v]+", diyas glowing, title TOP","Main darshan: "+d[5],"Close devotion: face detail, eyes clear, ornaments sharp","Closing CTA: full frame, gold dust, god-ray pulse, petals falling"];
+ var vo=[hook,"Story: "+d[4]+". Faith, peace and love in one calm feeling.","Mantra: say it from the heart.",cta];
+ var L=[];
+ L.push("L"+n+" "+LN[n-1]+" · OTT Premium Ultra · Indian Bhakti Dhara","PLATFORM: "+P[1]+" · "+P[2]+" · "+P[3]+" · Title TOP · Bottom CLEAN. "+P[4],"",
+ "NATURE CONTROL: "+d[2]+" ("+d[3]+") · "+d[4],"POSE: "+d[5],"PLACEMENT: "+d[9],"MOOD: "+d[6]+" · COLOUR: "+d[7]+" · LIGHT: "+d[8],"NEVER: "+d[10]+". Never borrow another deity's pose, mood or colour.","",
+ "0. ALWAYS UNIQUE VARIATION, NEVER GHISA PITA. Every prompt, image and scene must be unique: new angle, pose, light and background. If any 2 match the previous poster, regenerate.",
+ "Variation for L"+n+": Angle: "+ANG[v]+" · Light: "+LIG[(n+2)%6]+" · Background: "+BG[(n+3)%6]+" · Title: "+TT[(n+4)%6]+". The deity nature and platform rule always win over variation.","",
+ "1. POSITIVE PROMPT:","A divine cinematic OTT Premium Ultra poster for Indian Bhakti Dhara. Scene: "+d[2]+", "+d[4]+". "+d[5]+". One clear main subject, diyas, marigold, incense smoke, temple architecture.",
+ (dop?"DOP: Nolan / Hoyte van Hoytema IMAX, Deakins volumetric, Lubezki natural light, Greig Fraser haze"+(n==30?" (all combined)":"")+". Netflix, HBO, Disney+, Apple TV, Nat Geo, BBC Earth finish.":"DOP: Deakins-inspired soft volumetric teal + gold, reference only at this level."),
+ "CAMERA: "+(n>=21?"IMAX 65mm":"Cinema camera")+" · Shutter "+t.sh+" · Angle "+t.an+" · Lens 35mm + 85mm · Aperture "+t.ap+" · ISO "+t.iso+" · WB 5600K Warm Gold · shallow depth of field, golden bokeh, face sharp.",
+ "RENDER: "+RES[n-1]+" · Steps "+STEPS[n-1]+" · Tier "+t.t+".",
+ "FACE: Face, Eyes, Hands, Skin and Jewellery Detailer "+t.face+". Crown, necklace, armlets, bangles, mala beads and gold zari borders sharp. No extra fingers.",
+ "LIGHTING: Key gold god-ray, teal fill, gold rim · Moog glow "+t.moog+" · God-ray "+t.god+" · Nebula "+t.neb+" · deep teal shadows.",
+ "VFX: Gold dust, mist, bloom, soft lens flare, cinematic film grain · VFX "+t.vfx+".",
+ "COLOUR: Nature colour "+d[7]+" with Deep Teal + Gold grade inside it. LUT: "+lut+". Skin warm natural, no oversaturation.",
+ "THUMBNAIL CTR: close-up face, eye contact, gold title on dark teal with white outline, one main subject (3-second rule), one curiosity moment.","");
+ if(dop)L.push("MOTION: Slow Divine Drift + Cinematic Orbit 360, God-Ray Pulse, Petal Fall, Gold Dust Float · "+(n>=18?"8–10 sec":"6 sec")+" · seamless loop · 24fps.","");
+ L.push("1B. AUDIO: "+d[2]+" · "+m+" · Voice 80% / Music 20% · soft devotional · clean loop · no loud beats · no copyrighted Bollywood.",
+ "1C. VOICEOVER: "+lg+" · calm divine · "+ln[2]+" · Hook 3 sec + Story + Mantra + CTA. Hook: "+hook,
+ "1D. EDITING: slow divine drift, fade/dissolve, slow zoom, gold dust · 1 scene = 3–5 sec · no fast cuts · title TOP only.",
+ "1E. TITLE ANIMATION: gold fade-in from top, slow scale 95% to 100%, sparkle, 2 sec hold. No bounce.",
+ "1F. EXPORT: "+P[1]+" · "+P[5]+" · MP4 H.264 · AAC.","",
+ "1G. STORYBOARD ("+ln[1]+"):");
+ sc.forEach(function(s,i){L.push("Scene "+(i+1)+" | "+s+" | VO: "+vo[i]+" | Music: "+m+" | "+ln[3][i]+" sec | Title TOP")});
+ L.push("","2. NEGATIVE PROMPT: No flat cartoon, no AI feel, no blurry face, no melting jewellery, no extra fingers/hands, no wrong spelling, no crowded composition, no instruction text on poster, no level tag on poster, no Om logo, no circular logo, no violent scene, no distorted eyes, no watermark, no oversaturation.","",
+ "3. BRANDING: Top-left corner ONLY \"IBD\", small bold gold. Bottom-centre small white \"An Indian Bhakti Dhara Production\". Title in gold bold, Devanagari sharp and correctly spelt. No other logo.");
+ return L.join("\n")}
+function render(){
+ $("plat").innerHTML="";PL.forEach(function(p,i){var b=document.createElement("button");b.className="opt"+(i==S.p?" on":"");b.innerHTML="<b>"+p[2]+"</b><span>"+p[1]+" · "+p[3]+"</span>";b.onclick=function(){S.p=i;render()};$("plat").appendChild(b)});
+ var P=PL[S.p];$("platInfo").textContent=P[4];
+ $("deity").innerHTML="";DE.forEach(function(d,i){var b=document.createElement("button");b.className="opt"+(i==S.d?" on":"");b.innerHTML="<b>"+d[2]+"</b><span class=\"hi\" style=\"font-size:15px;display:block\">"+d[3]+"</span><span>"+d[1]+"</span>";b.onclick=function(){S.d=i;render()};$("deity").appendChild(b)});
+ var d=DE[S.d];$("deityInfo").textContent=d[3]+" · "+d[4]+" · "+d[5]+" · Never: "+d[10];
+ $("lv").innerHTML="";for(var n=1;n<=30;n++)(function(n){var b=document.createElement("button");b.textContent="L"+n;b.className=n==S.l?"on":"";b.onclick=function(){S.l=n;render()};$("lv").appendChild(b)})(n);
+ $("lvName").textContent="L"+S.l+" · "+LN[S.l-1]+" · "+RES[S.l-1];
+ $("lvNote").textContent=S.l<18?"Draft level, for practice and review.":S.l==18?"Minimum level cleared for posting.":S.l==30?"Complete standard for hero posters.":"Above the posting minimum.";
+ var a=$("langs");a.innerHTML="";LANGS.forEach(function(x,i){var b=document.createElement("button");b.className="pill"+(i==S.lang?" on":"");b.textContent=x;b.onclick=function(){S.lang=i;render()};a.appendChild(b)});
+ a=$("lens");a.innerHTML="";LENS.forEach(function(x,i){var b=document.createElement("button");b.className="pill"+(i==S.len?" on":"");b.textContent=x[1];b.onclick=function(){S.len=i;render()};a.appendChild(b)});
+ a=$("luts");a.innerHTML="";LUTS.forEach(function(x){var b=document.createElement("button");b.className="pill"+(x[0]==S.lut?" on":"");b.textContent=x[1];b.onclick=function(){S.lut=x[0];render()};a.appendChild(b)});
+ $("out").value=build();}
+function msg(t){$("msg").textContent=t;setTimeout(function(){$("msg").textContent=""},2500)}
+var KEY="ibd-packs",packs=[];
+try{packs=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){packs=[]}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(packs))}catch(e){}}
+function drawPacks(){var u=$("packs");u.innerHTML="";if(!packs.length){u.innerHTML="<li class='note'>No saved packs yet.</li>";return}
+ packs.forEach(function(p,i){var li=document.createElement("li");li.className="pk";li.innerHTML="<span></span><span></span>";li.firstChild.textContent=p.title;
+ var w=li.lastChild;["Load","Copy","Delete"].forEach(function(k){var b=document.createElement("button");b.textContent=k;b.onclick=function(){
+  if(k=="Load"){Object.assign(S,p.s);render();window.scrollTo({top:0,behavior:"smooth"})}
+  if(k=="Copy"){cp(p.text)}
+  if(k=="Delete"){packs.splice(i,1);persist();drawPacks()}};w.appendChild(b)});u.appendChild(li)})}
+function cp(t){try{navigator.clipboard.writeText(t).then(function(){msg("Copied")},fb)}catch(e){fb()}function fb(){$("out").select();document.execCommand("copy");msg("Copied")}}
+$("copy").onclick=function(){cp($("out").value)};
+$("save").onclick=function(){packs.unshift({title:"L"+S.l+" "+DE[S.d][2]+" · "+PL[S.p][1]+" · "+LANGS[S.lang]+" · "+LENS[S.len][1],s:Object.assign({},S),text:$("out").value});packs=packs.slice(0,30);persist();drawPacks();msg("Saved")};
+$("dl").onclick=function(){var a=document.createElement("a");a.href="data:text/plain;charset=utf-8,"+encodeURIComponent($("out").value);a.download="IBD-L"+S.l+"-"+DE[S.d][0]+".txt";document.body.appendChild(a);a.click();a.remove()};
+$("prev").onclick=function(){S.l=Math.max(1,S.l-1);render()};$("next").onclick=function(){S.l=Math.min(30,S.l+1);render()};
+$("theme").onclick=function(){var r=document.documentElement,c=r.getAttribute("data-theme");r.setAttribute("data-theme",c=="light"?"dark":"light")};
+var DV={sc:0,at:0,ex:0,has:false,mode:0};
+var DSC=["Performing aarti with a lit diya plate, eyes lowered in devotion","Seated in prayer with folded hands, head gently bowed","Standing in prayer with folded hands (Namaskar), facing the deity","Walking Pradakshina around the temple, one hand raised in blessing","Offering flowers and incense at the altar"];
+var DAT=["Traditional kurta with dhoti or pyjama","Traditional saree","Traditional salwar suit","Keep the clothing from the reference photo"];
+var DEX=["Calm, reverent devotion","Soft peaceful smile","Eyes closed in deep prayer"];
+function dvChips(id,arr,key){var a=$(id);a.innerHTML="";arr.forEach(function(x,i){var b=document.createElement("button");b.className="pill"+(DV[key]==i?" on":"");b.textContent=x;b.onclick=function(){DV[key]=i;dv()};a.appendChild(b)})}
+function dv(){
+ dvChips("dvsc",DSC,"sc");dvChips("dvat",DAT,"at");dvChips("dvex",DEX,"ex");
+ var P=PL[S.p],d=DE[S.d],n=S.l,t=tier(n),v=(n-1)%6,lut=S.lut==="auto"?autoLut(d):S.lut,L=[];
+ if(!DV.has)L.push("[Attach your reference photo in the image tool along with this prompt.]","");
+ L.push("DEVOTEE PORTRAIT · L"+n+" "+LN[n-1]+" · Indian Bhakti Dhara",
+ "PLATFORM: "+P[1]+" · "+P[2]+" · "+P[3]+" · Title TOP · Bottom CLEAN. "+P[4],"",
+ idLock(),"",
+ sceneLine(),
+ attireLine(),
+ "DEITY PRESENCE: "+d[2]+" ("+d[3]+") as a sacred murti or divine presence behind or above the devotee, never covering the face. Nature: "+d[4]+". "+d[5]+". Placement: "+d[9]+". Mood: "+d[6]+". Never: "+d[10]+".",
+ "SETTING: "+BG[v]+". Diyas glowing, marigold, incense smoke, temple architecture.",
+ "LIGHT: "+LIG[(n+2)%6]+". Warm gold on the face, deep teal shadows, gentle rim light. Face evenly and truthfully lit.",
+ "CAMERA: Shutter "+t.sh+" · Aperture "+t.ap+" · ISO "+t.iso+" · 35mm + 85mm · shallow depth of field, face sharp. "+ANG[v]+".",
+ "COLOUR: "+d[7]+" with Deep Teal + Gold grade. LUT: "+lut+". Skin tone stays exactly as in the photo, no oversaturation.",
+ "DETAIL: "+RES[n-1]+" · Face, Eyes, Hands, Skin and Jewellery Detailer "+t.face+" in faithful mode: sharpen only, never reshape. Correct hands, no extra fingers. Aarti plate and diya flame clearly rendered.",
+ "COMPOSITION: "+TT[(n+4)%6]+". Face centre or centre-middle, inside the platform safe zone.","",
+ "NEGATIVE: No face change, no different person, no face swap, no merged or averaged faces between people, no beautification, no skin lightening, no age change, no changed hair or facial hair, no extra fingers, no melting jewellery, no distorted eyes, no flat cartoon look, no watermark, no instruction text on the image, no level tag, no Om logo, no circular logo, no violent scene.","",
+ "BRANDING: Top-left corner ONLY \"IBD\", small bold gold. Bottom-centre small white \"An Indian Bhakti Dhara Production\". No other logo.","",
+ "TIP: If the result drifts from the photo, regenerate with the same photo and repeat the IDENTITY LOCK line first.");
+ $("dvout").value=L.join("\n")}
+var PH=[],PU=[];try{PH=JSON.parse(localStorage.getItem("ibd-photos")||"[]");PU=JSON.parse(localStorage.getItem("ibd-photos-use")||"[]")}catch(e){PH=[];PU=[]}
+while(PU.length<PH.length)PU.push(true);PU.length=PH.length;
+var PL=[];try{PL=JSON.parse(localStorage.getItem("ibd-photos-lab")||"[]")}catch(e){PL=[]}
+var ROLES=["Me","Father","Mother","Husband","Wife","Son","Daughter","Other"];
+var MODES=["One photo at a time","Couple (e.g. Father + Mother)","Same person, many photos"];
+var MNOTE=["One person. Tap Use photo on the photo you want. Choosing another switches to it.","Two different people. Pick exactly two photos and label them (for example Father and Mother). Each face is locked to its own photo. Attire follows each role unless you choose Keep clothing.","One person shown in several photos. Select the ones to combine for a more faithful likeness."];
+function useTog(i){if(DV.mode==0){PU=PU.map(function(){return false});PU[i]=true}else if(DV.mode==1){if(PU[i]){PU[i]=false}else{var s=SEL();if(s.length>=2)PU[s[0]]=false;PU[i]=true}}else{PU[i]=!PU[i]}savePH();drawPH()}
+function norm(){var s=SEL();
+ if(DV.mode==0){if(s.length>1){PU=PU.map(function(x,i){return i==s[0]})}else if(s.length==0&&PH.length){PU[0]=true}}
+ else if(DV.mode==1){if(s.length>2){PU=PU.map(function(x,i){return i==s[0]||i==s[1]})}else if(s.length==0){PH.forEach(function(x,i){PU[i]=i<2})}}
+ else if(s.length==0){PU=PH.map(function(){return true})}
+ while(PL.length<PH.length)PL.push("Me");PL.length=PH.length;savePH()}
+function drawMode(){var a=$("dvmode");a.innerHTML="";MODES.forEach(function(m,i){var b=document.createElement("button");b.className="pill"+(DV.mode==i?" on":"");b.textContent=m;b.onclick=function(){DV.mode=i;norm();drawPH()};a.appendChild(b)});$("modenote").textContent=MNOTE[DV.mode]}
+function roleAtt(l){return (l=="Father"||l=="Husband"||l=="Son")?"traditional kurta with dhoti or pyjama":(l=="Mother"||l=="Wife"||l=="Daughter")?"traditional saree or salwar suit":"traditional attire"}
+var CM="Keep the face, facial structure, eyes, nose, lips, skin tone, age, hair, facial hair, glasses and body proportions identical to the photo. Do not beautify, slim, lighten, age, de-age or restyle the face. Do not swap or blend in any other face. The person must be instantly recognisable as the same individual. Only the clothing, pose, setting and lighting change.";
+function idLock(){var s=SEL(),n=s.length,t="IDENTITY LOCK (HIGHEST PRIORITY): ";
+ if(DV.mode==1){if(n<2)return t+"Select two photos (for example Father and Mother) to build the couple prompt.";var a=s[0],b=s[1];
+  return t+"Two DIFFERENT people appear. Person 1 ("+PL[a]+") must match attached photo "+(a+1)+" exactly. Person 2 ("+PL[b]+") must match attached photo "+(b+1)+" exactly. For each person keep the face, facial structure, eyes, nose, lips, skin tone, age, hair, facial hair, glasses and body proportions identical to their own photo. Do not beautify, slim, lighten, age, de-age or restyle either face. Never swap, merge or average the two faces. Each person must be instantly recognisable. Only clothing, pose, setting and lighting change."}
+ if(DV.mode==0)return t+"Use attached reference photo"+(n?" "+(s[0]+1)+" ("+PL[s[0]]+")":"")+" as the exact person. "+CM;
+ return t+"Use the attached reference photo"+(n>1?"s (all of the same person, "+n+" provided, photos "+s.map(function(i){return i+1}).join(", ")+"; combine them for the most faithful likeness)":n==1?" (photo "+(s[0]+1)+")":"")+" as the exact person. "+CM}
+function sceneLine(){var s=SEL(),e="Expression: "+DEX[DV.ex].toLowerCase()+", natural and respectful, matching ";
+ if(DV.mode==1&&s.length>1)return "SCENE: The two people from the photos ("+PL[s[0]]+" and "+PL[s[1]]+") are together in one frame, side by side, "+DSC[DV.sc].toLowerCase()+". Both faces clearly visible and unobstructed. "+e+"each face in their own photo.";
+ return "SCENE: The person from the photo is "+DSC[DV.sc].toLowerCase()+". "+e+"the face in the photo."}
+function attireLine(){var s=SEL();
+ if(DV.mode==1&&s.length>1){if(DV.at==3)return "ATTIRE: Keep each person's clothing from their own photo.";return "ATTIRE: Person 1 ("+PL[s[0]]+"): "+roleAtt(PL[s[0]])+"; Person 2 ("+PL[s[1]]+"): "+roleAtt(PL[s[1]])+", simple and clean with gold borders, marigold mala. Clothing only; do not change body shapes."}
+ return "ATTIRE: "+DAT[DV.at]+(DV.at==3?".":", simple and clean with gold borders, marigold mala. Clothing only; do not change the body shape.")}
+function SEL(){var r=[];PH.forEach(function(x,i){if(PU[i])r.push(i)});return r}
+function savePH(){try{localStorage.setItem("ibd-photos",JSON.stringify(PH));localStorage.setItem("ibd-photos-use",JSON.stringify(PU));localStorage.setItem("ibd-photos-lab",JSON.stringify(PL))}catch(e){$("dvmsg").textContent="Browser storage is full. Remove a photo and retry."}}
+function drawPH(){DV.has=SEL().length>0;var w=$("phs");w.innerHTML="";
+ PH.forEach(function(src,i){var box=document.createElement("div");box.style.cssText="display:flex;flex-direction:column;gap:4px;align-items:center";
+  var im=document.createElement("img");im.src=src;im.alt="Reference photo "+(i+1);im.style.cssText="width:84px;height:84px;object-fit:cover;border-radius:12px;border:1px solid var(--line)";
+  var a=document.createElement("a");a.href=src;a.download="devotee-photo-"+(i+1)+".jpg";a.textContent="Download";a.style.cssText="font-size:11px;color:var(--teal)";
+  var b=document.createElement("button");b.className="pill";b.style.cssText="padding:3px 10px;font-size:11px";b.textContent="Remove";b.onclick=function(){PH.splice(i,1);PU.splice(i,1);PL.splice(i,1);norm();drawPH()};
+  var u=document.createElement("button");u.className="pill"+(PU[i]?" on":"");u.style.cssText="padding:3px 10px;font-size:11px";u.textContent=PU[i]?"Using":"Use photo";u.setAttribute("aria-pressed",PU[i]?"true":"false");u.onclick=function(){useTog(i)};
+  im.style.opacity=PU[i]?1:0.35;
+  var sl=document.createElement("select");sl.setAttribute("aria-label","Who is in photo "+(i+1));sl.style.cssText="font-size:11px;padding:3px;border-radius:8px;background:var(--s2);border:1px solid var(--line);max-width:84px";ROLES.forEach(function(r){var o=document.createElement("option");o.value=r;o.textContent=r;sl.appendChild(o)});sl.value=PL[i]||"Me";sl.onchange=function(){PL[i]=sl.value;savePH();dv()};box.appendChild(im);box.appendChild(sl);box.appendChild(u);box.appendChild(a);box.appendChild(b);w.appendChild(box)});
+ $("phcount").textContent=PH.length+" / 5 photos · using "+SEL().length;$("phclear").style.display=PH.length?"":"none";$("phall").style.display=(DV.mode==2&&PH.length)?"":"none";drawMode();dv()}
+function shrink(f,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var m=700,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",0.85))};im.onerror=function(){cb(null)};im.src=r.result};r.onerror=function(){cb(null)};r.readAsDataURL(f)}
+$("ph").onchange=function(e){var fs=Array.prototype.slice.call(e.target.files||[]),room=5-PH.length;e.target.value="";
+ if(room<=0){$("dvmsg").textContent="Maximum 5 photos. Remove one first.";return}
+ if(fs.length>room){$("dvmsg").textContent="Only "+room+" more fit. Extra photos skipped.";fs=fs.slice(0,room)}
+ (function next(){var f=fs.shift();if(!f){norm();drawPH();return}shrink(f,function(d){if(d){PH.push(d);PU.push(DV.mode==2);PL.push("Me")}next()})})()};
+$("phclear").onclick=function(){PH=[];PU=[];PL=[];savePH();drawPH()};
+$("phall").onclick=function(){PU=PH.map(function(){return true});savePH();drawPH()};
+$("dvcopy").onclick=function(){var el=$("dvout");try{navigator.clipboard.writeText(el.value).then(ok,fb)}catch(x){fb()}function fb(){el.select();document.execCommand("copy");ok()}function ok(){$("dvmsg").textContent="Copied";setTimeout(function(){$("dvmsg").textContent=""},2500)}};
+var _r=render;render=function(){_r();dv()};
+norm();drawPH();
+render();drawPacks();
+</script></body></html>
